@@ -35,6 +35,31 @@ public class MemberDAO {
 		return result;
 	}
 
+	public int updateMember(Connection conn, Member member) {
+		String query = "UPDATE MEMBER_TBL SET MEMBER_PW = ?, MEMBER_PW2 =?, "
+				+ "MEMBER_NICKNAME =?, MEMBER_PHONE =?, MEMBER_EMAIL=?, "
+				+ "MEMBER_ADDRESS=?,UPDATE_DATE=DEFAULT WHERE MEMBER_ID = ?";
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, member.getMemberPw());
+			pstmt.setString(2, member.getMemberPw2());
+			pstmt.setString(3, member.getMemberNickname());
+			pstmt.setString(4, member.getMemberPhone());
+			pstmt.setString(5, member.getMemberEmail());
+			pstmt.setString(6, member.getMemberAddress());
+			pstmt.setString(7, member.getMemberId());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
+		return result;
+	}
+
 	public Member selectCheckLogin(Connection conn, Member member) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -59,6 +84,32 @@ public class MemberDAO {
 				e.printStackTrace();
 			}
 		}
+		return mOne;
+	}
+
+	public Member selectOneById(Connection conn, String memberId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = "SELECT * FROM MEMBER_TBL WHERE MEMBER_ID =?";
+		Member mOne = null;
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, memberId);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				mOne = rsetToMember(rset);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rset.close();
+				pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
 		return mOne;
 	}
 

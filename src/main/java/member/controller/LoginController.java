@@ -32,7 +32,7 @@ public class LoginController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		request.getRequestDispatcher("/WEB-INF/views/member/login.jsp").forward(request, response);
 	}
 
 	/**
@@ -55,14 +55,14 @@ public class LoginController extends HttpServlet {
 			request.setAttribute("msg", "로그인 성공!");
 			request.setAttribute("url", "/index.jsp");
 			RequestDispatcher view 
-			= request.getRequestDispatcher("/member/serviceSuccess.jsp");
+			= request.getRequestDispatcher("/WEB-INF/views/serviceSuccess.jsp");
 			view.forward(request, response); // 누락 주의 
 			
 		} else {
 			// 로그인 실패 
 			request.setAttribute("msg", "로그인 실패!");
 			RequestDispatcher view 
-			= request.getRequestDispatcher("/member/serviceFailed.jsp");
+			= request.getRequestDispatcher("/WEB-INF/views/serviceFailed.jsp");
 			view.forward(request, response);
 		}
 	}

@@ -1,22 +1,32 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
-<html lang="ko">
-    <head>
-        <meta charset="UTF-8">
+<html>
+	<head>
+		<meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>살림ing</title>
         <link rel="stylesheet" href="/resources/css/header&footer.css">
         <link rel="stylesheet" href="/resources/css/mypage.css">
         <link rel="stylesheet" href="/resources/css/community.css">
-    </head>
-    <body>
-        <div id="container">
+	</head>
+	<body>
+		<div id="container">
             <nav id="nav1"> 
                 <div id="nav1-1"></div>
                 <div id="nav1-2">
                     <ul id="nav1ul">
-                        <li><a href="/member/mypage.do">마이페이지</a></li>
+                        <c:if test="${sessionScope.memberId !=null }">
+                    	<li><a href="/member/mypage.do">마이페이지</a></li>
                         <li><a href="/member/logout.do">로그아웃</a></li>
+                    </c:if>
+                    
+                    <c:if test="${memberId eq null }">
+                        <li><a href="/member/login.do">로그인</a></li>
+                        <li><a href="/member/register.do">회원가입</a></li>
+                    </c:if>
                     </ul>
                 </div>
             </nav>
@@ -29,7 +39,7 @@
                         <li><a href="/community/saliming-community.html">커뮤니티</a></li>
                         <li><a href="/shopping/saliming-shopping.html">쇼핑</a></li>
                         <li><a href="/event/saliming-eventing.html">이벤트</a></li> 
-                        <li><a href="/notice/list.dotice.html">고객지원</a></li>
+                        <li><a href="/notice/list.do">고객지원</a></li>
                     </ul>
                 </nav>
             </header>
@@ -55,9 +65,14 @@
                     <div>
                         <div id="sharetitle">공지사항</div>
                     </div>
-            
                     <div class="actionArea">
-
+            			<c:if test="${memberId eq 'admin' }">
+							<span class="writeArea">
+								<form action="/notice/insert.do" method="get">
+                           			<button class="writeBtn" onclick="">글쓰기</button> 
+                            	</form>
+                        	</span>
+                        </c:if>
                         <span class="searchArea">
                             <input class="searchInput" type="text" placeholder="검색">
                             <a class="searchIconATag" href="#"><img class="searchIcon" src="/resources/img/검색.png""></a>
@@ -74,66 +89,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>공지1</td>
-                                <td>2023-05-31</td>
-                                <td>0</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>공지2</td>
-                                <td>2023-05-31</td>
-                                <td>0</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>공지3</td>
-                                <td>2023-05-31</td>
-                                <td>0</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>공지4</td>
-                                <td>2023-05-31</td>
-                                <td>0</td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>공지5</td>
-                                <td>2023-05-31</td>
-                                <td>0</td>
-                            </tr>
-                            <tr>
-                                <td>6</td>
-                                <td>공지6</td>
-                                <td>2023-05-31</td>
-                                <td>0</td>
-                            </tr>
-                            <tr>
-                                <td>7</td>
-                                <td>공지7</td>
-                                <td>2023-05-31</td>
-                                <td>0</td>
-                            </tr>
-                            <tr>
-                                <td>8</td>
-                                <td>공지8</td>
-                                <td>2023-05-31</td>
-                                <td>0</td>
-                            </tr>
-                            <tr>
-                                <td>9</td>
-                                <td>공지9</td>
-                                <td>2023-05-31</td>
-                                <td>0</td>
-                            </tr>
-                            <tr>
-                                <td>10</td>
-                                <td>공지10</td>
-                                <td>2023-05-31</td>
-                                <td>0</td>
-                            </tr>
+                        	<c:forEach var="notice" items="${requestScope.nList }">
+	                            <tr>
+	                                <td>${notice.noticeNo }</td>
+	                                <td><a href="/notice/detail.do?noticeNo=${notice.noticeNo }">${notice.noticeSubject }</td>
+	                                <td>${notice.noticeDate }</td>
+	                                <td>${notice.viewCount }</td>
+	                            </tr>
+                           </c:forEach>
                         </tbody>
                     </table>
             
@@ -159,5 +122,5 @@
                 </ul>
             </footer>
         </div>
-    </body>
+	</body>
 </html>

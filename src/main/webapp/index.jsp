@@ -17,13 +17,13 @@
                 <div id="nav1-2">
                     <ul id="nav1ul">
                     <c:if test="${sessionScope.memberId !=null }">
-                    	<li><a href="/member/mypage.jsp">마이페이지</a></li>
+                    	<li><a href="/member/mypage.do">마이페이지</a></li>
                         <li><a href="/member/logout.do">로그아웃</a></li>
                     </c:if>
                     
                     <c:if test="${memberId eq null }">
-                        <li><a href="/member/login.jsp">로그인</a></li>
-                        <li><a href="/member/enroll.jsp">회원가입</a></li>
+                        <li><a href="/member/login.do">로그인</a></li>
+                        <li><a href="/member/register.do">회원가입</a></li>
                     </c:if>
                     </ul>
                 </div>
@@ -37,7 +37,7 @@
                         <li><a href="/community/saliming-community.html">커뮤니티</a></li>
                         <li><a href="/shopping/saliming-shopping.html">쇼핑</a></li>
                         <li><a href="/event/saliming-eventing.html">이벤트</a></li> 
-                        <li><a href="/help/saliming-notice.html">고객지원</a></li>
+                        <li><a href="/notice/list.do">고객지원</a></li>
                     </ul>
                 </nav>
             </header>

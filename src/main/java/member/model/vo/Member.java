@@ -42,9 +42,21 @@ public class Member {
 		this.memberPw = memberPw;
 	}
 	
+	// 수정용
+	public Member(String memberId, String memberPw, String memberPw2, String memberNickname, String memberPhone,
+			String memberEmail, String memberAddress) {
+		super();
+		this.memberId = memberId;
+		this.memberPw = memberPw;
+		this.memberPw2 = memberPw2;
+		this.memberNickname = memberNickname;
+		this.memberPhone = memberPhone;
+		this.memberEmail = memberEmail;
+		this.memberAddress = memberAddress;
+	}
 
-
-
+	
+	
 	// getter, setter 
 	public String getMemberId() {
 		return memberId;

@@ -1,7 +1,9 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="ko">
-    <head>
-        <meta charset="UTF-8">
+<html>
+	<head>
+		<meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>살림ing</title>
@@ -9,15 +11,15 @@
         <link rel="stylesheet" href="/resources/css/mypage.css">
         <link rel="stylesheet" href="/resources/css/community.css">
         <link rel="stylesheet" href="/resources/css/user-edit.css">
-    </head>
-    <body>
-        <div id="container">
+	</head>
+	<body>
+		<div id="container">
             <nav id="nav1">
                 <div id="nav1-1"></div>
                 <div id="nav1-2">
                     <ul id="nav1ul">
-                        <li><a href="/member/saliming-mypage.html">마이페이지</a></li>
-                        <li><a href="/member/saliming-login.html">로그아웃</a></li>
+                        <li><a href="/member/mypage.do">마이페이지</a></li>
+                        <li><a href="/member/logout.do">로그아웃</a></li>
                     </ul>
                 </div>
             </nav>
@@ -30,7 +32,7 @@
                         <li><a href="/community/saliming-community.html">커뮤니티</a></li>
                         <li><a href="/shopping/saliming-shopping.html">쇼핑</a></li>
                         <li><a href="/event/saliming-eventing.html">이벤트</a></li> 
-                        <li><a href="/help/saliming-notice.html">고객지원</a></li>
+                        <li><a href="/notice/list.do">고객지원</a></li>
                     </ul>
                 </nav>
             </header>
@@ -38,10 +40,10 @@
                 <div id="main-left">
                     <table id="category">
                         <tr>
-                            <th><a href="/member/saliming-mypage.html">마이페이지</a></th>
+                            <th><a href="/member/mypage.do">마이페이지</a></th>
                         </tr>
                         <tr>
-                            <td><a href="/member/saliming-mypage-edit.html">회원정보수정</a></td>
+                            <td><a href="/member/myInfo.do?id=${memberId }">회원정보수정</a></td>
                         </tr>
                         <tr>
                             <td><a href="#">장바구니</a></td>
@@ -66,7 +68,7 @@
                 <div id="main-right">
                     <div id="prop">
                     <p class="titles">
-                        살림이(김이름)님 <br> 안녕하세요!
+                        ${sessionScope.memberName }(${sessionScope.memberId })님 환영합니다! <br> 
                     </p>
                     </div>
                     <div id="mynotifi">
@@ -95,6 +97,6 @@
                     <!-- <li><a href="#">맞다</a></li> -->
                 </ul>
             </footer>
-            </div>
-    </body>
+		</div>
+	</body>
 </html>
