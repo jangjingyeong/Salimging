@@ -31,13 +31,22 @@ public class NoticeDAO {
 		return result;
 	}
 
-	public List<Notice> selectNoticeList(Connection conn) {
+	public List<Notice> selectNoticeList(Connection conn, int currentPage) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "SELECT * FROM NOTICE_TBL ORDER BY NOTICE_DATE DESC";
-		List<Notice> nList = new ArrayList<Notice>();
+		String query = "SELECT * FROM(SELECT ROW_NUMBER() OVER(ORDER BY NOTICE_NO DESC) ROW_NUM, NOTICE_TBL.* FROM NOTICE_TBL) WHERE ROW_NUM BETWEEN ? AND ?";
+		List<Notice> nList= new ArrayList<Notice>();
+		int recordCountPerPage = 10; // 10개씩 보여주겠다! 
+		// currentPage       start 
+		//      1              1
+		//      2             11
+		//      3             21
+		int start = currentPage*recordCountPerPage - (recordCountPerPage - 1);
+		int end = currentPage*recordCountPerPage;
 		try {
 			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
@@ -56,6 +65,58 @@ public class NoticeDAO {
 			}
 		}
 		return nList;
+	}
+
+	public String generatePageNavi(int currentPage) {
+		// 전체 게시물의 갯수 : 37
+		// 1페이지 보여줄 게시물 수 : 10 
+		// 범위의 갯수(네비게이터의 수) : 4
+		
+		// 전체 게시물의 갯수 : 55
+		// 1페이지 보여줄 게시물 수 : 10
+		// 범위의 갯수(네비게이터의 수) : 6
+		
+		// 전체 게시물의 갯수 : 76
+		// 1페이지 보여줄 게시물 수 : 10
+		// 범위의 갯수(네비게이터의 수) : 8
+		int totalCount = 206;
+		int recordCountPerPage = 10;
+		int naviTotalCount = 0;
+		if(totalCount % recordCountPerPage > 0) {
+			naviTotalCount = totalCount / recordCountPerPage + 1;
+		} else {
+			naviTotalCount = totalCount / recordCountPerPage;
+		}
+		int naviCountPerPage = 5;
+		// currentPage           startNavi       endNavi
+		//  1,2,3,4,5                1              5
+		//  6,7,8,9,10               6              10
+		//  11,12,13,14,15           11             16
+		//  16,17,18,19,20           16             20  
+		int startNavi = ((currentPage - 1)/naviCountPerPage) * naviCountPerPage + 1;
+		int endNavi = startNavi + 5;
+		if(endNavi > naviTotalCount) {
+			endNavi = naviTotalCount;
+		}
+		boolean needPrev = true;
+		boolean needNext = true;
+		if(startNavi == 1) {
+			needPrev = false;
+		}
+		if(endNavi == naviTotalCount) {
+			needNext = false;
+		}
+		StringBuilder result = new StringBuilder(); // 누적하게 해주는 자바 api
+		if(needPrev) {
+			result.append("<a href='/notice/list.do?currentPage="+(startNavi-1)+"' class='first'><img class='arrowKey' src='/resources/img/왼쪽페이지.png'>&nbsp;&nbsp;&nbsp;</a>");
+		}
+		for(int i = startNavi; i <= endNavi; i++) {
+			result.append("<a href='/notice/list.do?currentPage="+i+"'>"+i+"&nbsp;&nbsp;&nbsp;</a>");
+		}
+		if(needNext) {
+			result.append("<a href='/notice/list.do?currentPage="+(endNavi+1)+"' class='last'><img class='arrowKey' src='/resources/img/오른쪽페이지.png'></a>");
+		}
+		return result.toString();
 	}
 
 	public Notice selectOneByNo(Connection conn, int noticeNo) {

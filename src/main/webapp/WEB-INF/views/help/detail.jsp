@@ -14,28 +14,8 @@
 	</head>
 	<body>
 		<div id="container">
-            <nav id="nav1"> 
-                <div id="nav1-1"></div>
-                <div id="nav1-2">
-                    <ul id="nav1ul">
-                        <li><a href="/member/mypage.do">마이페이지</a></li>
-                        <li><a href="/member/logout.do">로그아웃</a></li>
-                    </ul>
-                </div>
-            </nav>
-            <header id="header">
-                <div id="logo">
-                    <a href="/index.jsp"><h1><i>살림ing</i></h1></a>
-                </div>
-                <nav id="nav2">
-                    <ul id="nav2ul">
-                        <li><a href="/community/saliming-community.html">커뮤니티</a></li>
-                        <li><a href="/shopping/saliming-shopping.html">쇼핑</a></li>
-                        <li><a href="/event/saliming-eventing.html">이벤트</a></li> 
-                        <li><a href="/notice/list.do"">고객지원</a></li>
-                    </ul>
-                </nav>
-            </header>
+            <jsp:include page="/WEB-INF/views/include/nav.jsp"></jsp:include>
+            <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
             <main id="main">
                 <div id="main-left">
                     <table id="category">

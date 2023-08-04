@@ -1,63 +1,41 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="ko">
     <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>살림ing</title>
-        <link rel="stylesheet" href="/resources/css/header&footer.css">
-        <link rel="stylesheet" href="/resources/css/mypage.css">
+        <jsp:include page="/WEB-INF/views/include/head.jsp"></jsp:include>
         <link rel="stylesheet" href="/resources/css/community.css">
     </head>
     <body>
         <div id="container">
-            <nav id="nav1"> 
-                <div id="nav1-1"></div>
-                <div id="nav1-2">
-                    <ul id="nav1ul">
-                        <li><a href="/member/mypage.do">마이페이지</a></li>
-                        <li><a href="/member/logout.do">로그아웃</a></li>
-                    </ul>
-                </div>
-            </nav>
-            <header id="header">
-                <div id="logo">
-                    <a href="/index.jsp"><h1><i>살림ing</i></h1></a>
-                </div>
-                <nav id="nav2">
-                    <ul id="nav2ul">
-                        <li><a href="/community/saliming-community.html">커뮤니티</a></li>
-                        <li><a href="/shopping/saliming-shopping.html">쇼핑</a></li>
-                        <li><a href="/event/saliming-eventing.html">이벤트</a></li> 
-                        <li><a href="/notice/list.dotice.html">고객지원</a></li>
-                    </ul>
-                </nav>
-            </header>
+            <jsp:include page="/WEB-INF/views/include/nav.jsp"></jsp:include>
+            <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
             <main id="main">
-                <div id="main-left">
+                <div id="maincate">
                     <table id="category">
                         <tr>
-                            <th><a href="/notice/list.do">고객지원</a></th>
+                            <th><a href="/community/shareList.do">커뮤니티</a></th>
                         </tr>
                         <tr>
-                            <td><a href="/notice/list.do">공지사항</a></td>
+                            <td><a href="/community/shareList.do">정보공유게시판</a></td>
                         </tr>
                         <tr>
-                            <td><a href="#">FAQ</a></td>
+                            <td><a href="#">자유게시판</a></td>
                         </tr>
-                        <tr>
-                            <td><a href="#">Q&A</a></td>
-                        </tr>
-                    </table>
+                        
+                    </table>    
                 </div>
                 <section id="section">
 
                     <div>
-                        <div id="sharetitle">공지사항</div>
+                        <div id="sharetitle">정보공유게시판</div>
                     </div>
             
                     <div class="actionArea">
-
+                        <span class="writeArea">
+                            <button class="writeBtn" onclick="">글쓰기</button>
+                        </span>
                         <span class="searchArea">
                             <input class="searchInput" type="text" placeholder="검색">
                             <a class="searchIconATag" href="#"><img class="searchIcon" src="/resources/img/검색.png""></a>
@@ -69,6 +47,7 @@
                             <tr>
                                 <th>No</th>
                                 <th style="width: 300px;">제목</th>
+                                <th>작성자</th>
                                 <th>작성일</th>
                                 <th>조회수</th>
                             </tr>
@@ -76,61 +55,71 @@
                         <tbody>
                             <tr>
                                 <td>1</td>
-                                <td>공지1</td>
+                                <td>글1</td>
+                                <td>작성자</td>
                                 <td>2023-05-31</td>
                                 <td>0</td>
                             </tr>
                             <tr>
                                 <td>2</td>
-                                <td>공지2</td>
+                                <td>글2</td>
+                                <td>작성자</td>
                                 <td>2023-05-31</td>
                                 <td>0</td>
                             </tr>
                             <tr>
                                 <td>3</td>
-                                <td>공지3</td>
+                                <td>글3</td>
+                                <td>작성자</td>
                                 <td>2023-05-31</td>
                                 <td>0</td>
                             </tr>
                             <tr>
                                 <td>4</td>
-                                <td>공지4</td>
+                                <td>글4</td>
+                                <td>작성자</td>
                                 <td>2023-05-31</td>
                                 <td>0</td>
                             </tr>
                             <tr>
                                 <td>5</td>
-                                <td>공지5</td>
+                                <td>글5</td>
+                                <td>작성자</td>
                                 <td>2023-05-31</td>
                                 <td>0</td>
                             </tr>
                             <tr>
                                 <td>6</td>
-                                <td>공지6</td>
+                                <td>글6</td>
+                                <td>작성자</td>
                                 <td>2023-05-31</td>
                                 <td>0</td>
                             </tr>
                             <tr>
                                 <td>7</td>
-                                <td>공지7</td>
+                                <td>글7</td>
+                                <td>작성자</td>
                                 <td>2023-05-31</td>
                                 <td>0</td>
                             </tr>
                             <tr>
                                 <td>8</td>
-                                <td>공지8</td>
+                                <td>글8</td>
+                                <td>작성자</td>
                                 <td>2023-05-31</td>
                                 <td>0</td>
                             </tr>
                             <tr>
                                 <td>9</td>
-                                <td>공지9</td>
+                                <td>글9</td>
+                                <td>작성자</td>
                                 <td>2023-05-31</td>
                                 <td>0</td>
                             </tr>
                             <tr>
                                 <td>10</td>
-                                <td>공지10</td>
+                                <td>글10</td>
+                                <td>작성자</td>
                                 <td>2023-05-31</td>
                                 <td>0</td>
                             </tr>
