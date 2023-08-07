@@ -95,3 +95,25 @@ th a:link, th a:visited {
 hr {
     margin: 20px 0px 20px;
 }
+
+
+ a:link { 
+ 	color: black; 
+ 	text-decoration: none;
+ }
+ a:visited { 
+ 	color: black; 
+ 	text-decoration: none;
+ }
+ a:hover { 
+ 	color: black; 
+ 	text-decoration: none;
+ }
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

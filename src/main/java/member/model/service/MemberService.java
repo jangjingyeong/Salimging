@@ -40,6 +40,18 @@ public class MemberService {
 		return result;
 	}
 
+	public int deleteMember(String memberId) {
+		Connection conn = jdbcTemplate.createConnection();
+		int result = mDao.deleteMember(conn, memberId);
+		if(result > 0) {
+			jdbcTemplate.commit(conn);
+		} else {
+			jdbcTemplate.rollback(conn);
+		}
+		jdbcTemplate.close(conn);
+		return result;
+	}
+
 	public Member selectCheckLogin(Member member) {
 		Connection conn = jdbcTemplate.createConnection();
 		Member mOne = mDao.selectCheckLogin(conn, member);

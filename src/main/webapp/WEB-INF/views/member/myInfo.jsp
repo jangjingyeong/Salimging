@@ -100,9 +100,11 @@
 	                            <input type="text" name="detailAddress" id="detailAddress" placeholder="상세주소" class="addr"> 
 	                            </div>
 	                            <div id="edit-btns" class="edit">
-	                                <button id="edit-btn">회원정보수정</button>
+	                                <button id="edit-btn">회원정보수정   </button>
+	                                <a href="javascript:void(0)" onclick="checkDelete();">회원탈퇴</a>
 	                            </div>
                             </form>
+                            
                         </div>
                     </div>
                 </section>
@@ -116,5 +118,16 @@
                 </ul>
             </footer>
         </div>
+        <script>
+		// /member/delete.do?memberId=${sessionScope.memberId }
+			function checkDelete() {
+				const memberId = '${sessionScope.memberId}';
+				if(confirm("탈퇴하시겠습니까?")){
+					location.href = "/member/delete.do?memberId=" + memberId;
+				}
+				
+			}
+			
+		</script>
 	</body>
 </html>

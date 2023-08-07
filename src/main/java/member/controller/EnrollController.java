@@ -59,10 +59,10 @@ public class EnrollController extends HttpServlet {
 		if(result > 0) {
 			request.setAttribute("msg", "회원가입 성공");
 			request.setAttribute("url", "/index.jsp");
-			request.getRequestDispatcher("/WEB-INF/views/serviceSuccess.jsp")
+			request.getRequestDispatcher("/WEB-INF/views/common/serviceSuccess.jsp")
 			.forward(request, response);
 		} else {
-			request.getRequestDispatcher("/WEB-INF/views/serviceFailed.jsp")
+			request.getRequestDispatcher("/WEB-INF/views/common/serviceFailed.jsp")
 			.forward(request, response);
 		}
 	}

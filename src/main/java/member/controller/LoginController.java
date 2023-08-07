@@ -55,14 +55,14 @@ public class LoginController extends HttpServlet {
 			request.setAttribute("msg", "로그인 성공!");
 			request.setAttribute("url", "/index.jsp");
 			RequestDispatcher view 
-			= request.getRequestDispatcher("/WEB-INF/views/serviceSuccess.jsp");
+			= request.getRequestDispatcher("/WEB-INF/views/common/serviceSuccess.jsp");
 			view.forward(request, response); // 누락 주의 
 			
 		} else {
 			// 로그인 실패 
 			request.setAttribute("msg", "로그인 실패!");
 			RequestDispatcher view 
-			= request.getRequestDispatcher("/WEB-INF/views/serviceFailed.jsp");
+			= request.getRequestDispatcher("/WEB-INF/views/common/serviceFailed.jsp");
 			view.forward(request, response);
 		}
 	}

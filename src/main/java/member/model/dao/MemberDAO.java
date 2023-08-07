@@ -60,6 +60,23 @@ public class MemberDAO {
 		return result;
 	}
 
+	public int deleteMember(Connection conn, String memberId) {
+		String query = "DELETE FROM MEMBER_TBL WHERE MEMBER_ID = ?";
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, memberId);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
+		return result;
+	}
+
 	public Member selectCheckLogin(Connection conn, Member member) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;

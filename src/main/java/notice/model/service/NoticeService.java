@@ -32,6 +32,30 @@ public class NoticeService {
 		return result;
 	}
 	
+	public int updateNotice(Notice notice) {
+		Connection conn = jdbcTemplate.createConnection();
+		int result = nDao.updateNotice(conn, notice);
+		if(result > 0) {
+			jdbcTemplate.commit(conn);
+		} else {
+			jdbcTemplate.rollback(conn);
+		} 
+		jdbcTemplate.close(conn);
+		return result;
+	}
+
+	public int deleteNotice(int noticeNo) {
+		Connection conn = jdbcTemplate.createConnection();
+		int result = nDao.deleteNotice(conn, noticeNo);
+		if(result > 0) {
+			jdbcTemplate.commit(conn);
+		} else {
+			jdbcTemplate.rollback(conn);
+		} 
+		jdbcTemplate.close(conn);
+		return result;
+	}
+
 	// 공지사항 전체 목록 조회
 	public PageData selectNoticeList(int currentPage) {
 		Connection conn = jdbcTemplate.createConnection();

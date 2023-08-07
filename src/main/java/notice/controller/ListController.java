@@ -48,7 +48,7 @@ public class ListController extends HttpServlet {
 			// 실패하면 메시지 출력 후 메인으로 이동 
 			request.setAttribute("msg", "데이터 조회가 완료되지 않았습니다.");
 			request.setAttribute("url", "/index.jsp");
-			request.getRequestDispatcher("/WEB-INF/views/common/errorPage.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/views/common/serviceFailed.jsp").forward(request, response);
 		}
 	}
 
